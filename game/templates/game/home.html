@@ -2,23 +2,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to RPS Ultra</title>
+    <title>石頭剪刀布 - Rock Paper Scissors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC&display=swap" rel="stylesheet">
     <style>
-        body { background: #1d1f27; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .container { text-align: center; }
-        input { font-size: 1.5rem; padding: 10px; margin: 20px 0; }
-        button { font-size: 1.5rem; padding: 10px 20px; cursor: pointer; }
+        :root {
+            --bg-color: #f4f1e9; /* Parchment paper background */
+            --container-bg: rgba(255, 255, 255, 0.8);
+            --text-color: #4a4a4a; /* Dark ink color */
+            --primary-red: #d9534f; /* Softer, seal-like red */
+            --border-color: #c9b79c; /* Scroll-edge brown */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQYF5HZ1rqoRBYJaA4 sovrYFeYQKJlsqPpUhdbbAb6YbwrPCIQJZZS4hgHZNkTwEOV_T_HDxS4r7lAaA4mTEHHw/bRfXUTdse2Rcu2fRH3NUphQqyS26ZXSGIzDYLGUXLg2HUnAIjc3TIZ6c2hODbyU5A9oK3O9cvUZjsLFVquEjb75wJJmVsc283ajBOTD9AL6CvCqylrQCJ4zyjK74LzZ9RN4QOmsFnLpoBh8e5JQp1ACpVJFtcAUbeLqADVgdEJzaA6gpPWCtApATzV13ADL4PZESrrCCY3GW3EEPV0GSs5DnHd2z3AGK3MvB3G2WrhoehAAEecmDhhMVbTMAE+RsBUEnNp9AZGakMbtAFVidS4BIeHyxLMI67SpAO9sZgNGsWgc+M0S2MAFVhRgHiVYXTBw6CiTYXAZiFhB4JoMYlgPWQ3QxCntBPJrCAaiL1mMAVqNKOKy0Zc0WAAAAAElFTkSuQmCC'); /* Subtle pattern */
+            color: var(--text-color);
+            font-family: 'Noto Sans SC', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* === Main Content === */
+
+        .container {
+            text-align: center;
+            background: var(--container-bg);
+            padding: 40px 60px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            animation: fade-in 1.5s ease-out;
+            backdrop-filter: blur(4px); /* For a frosted glass effect */
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Ma Shan Zheng', cursive;
+            color: var(--text-color);
+            font-size: 5.5rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            font-size: 1.1rem;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        input {
+            font-size: 1.2rem;
+            padding: 12px 20px;
+            margin: 20px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-color);
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        input::placeholder {
+            color: #999;
+        }
+
+        input:focus {
+            border-bottom-color: var(--primary-red);
+        }
+
+        button {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: bold;
+            font-size: 1.5rem;
+            padding: 12px 45px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            background-color: var(--primary-red);
+            color: #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            background-color: #c9302c; /* A slightly darker red on hover */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Rock Paper Scissors</h1>
+        <h1>石頭剪刀布</h1>
+        <h2>Rock Paper Scissors</h2>
         <form action="{% url 'start_game' %}" method="post">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Enter Your Name" required>
+            <input type="text" name="username" placeholder="Enter Your Name" required autocomplete="off">
             <br>
-            <button type="submit">Start Game</button>
+            <button type="submit">Let's Play</button>
         </form>
     </div>
+
 </body>
-</html>
+</html> 
